@@ -29,5 +29,21 @@
   "error.missing_token": "Thiếu token.",
   "error.access_restricted_to_customers_only": "Chỉ khách hàng mới được phép truy cập.",
   "error.account_is_not_activated": "Tài khoản chưa được kích hoạt.",
-  "success.update_profile_successful": "Cập nhật thông tin cá nhân thành công."
+  "success.update_profile_successful": "Cập nhật thông tin cá nhân thành công.",
+  "error.failed_to_create_room": "Không thể tạo phòng.",
+  "error.failed_to_save_file": "Không thể lưu file.",
+  "error.failed_to_save_room_image": "Không thể lưu ảnh phòng.",
+  "error.invalid_price_per_night": "Giá phòng không hợp lệ.",
+  "error.invalid_bed_num": "Số giường không hợp lệ.",
+  "error.failed_to_load_rooms": "Không thể hiển thị danh sách phòng.",
+  "error.invalid_room_id": "Mã phòng không hợp lệ.",
+  "error.room_not_found": "Không tìm thấy phòng.",
+  "error.room_image_not_found": "Không tìm thấy hình ảnh phòng.",
+  "error.failed_to_create_folder": "Không thể tạo thư mục.",
+  "error.commit_transaction_failed": "Giao dịch thất bại.",
+  "error.failed_to_update_room": "Không thể cập nhật thông tin phòng.",
+  "error.failed_to_delete_image": "Không thể xóa ảnh.",
+  "error.failed_to_delete_review": "Không thể xóa đánh giá.",
+  "error.failed_to_delete_booking": "Không thể xóa đặt phòng.",
+  "error.failed_to_delete_room": "Không thể xóa phòng."
 }

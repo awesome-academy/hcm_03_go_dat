@@ -44,12 +44,25 @@ func SetupRoutes(r *gin.Engine) {
 	//Admin route
 	adminAuthUseCase := admin_usecase.NewAuthUseCase(userRepository)
 	adminHandler := admin.NewAdminHandler(adminAuthUseCase)
+
+	roomRepository := repository.NewRoomRepository(database.DB)
+	reviewRepository := repository.NewReviewRepository(database.DB)
+	bookingRepository := repository.NewBookingRepository(database.DB)
+	roomUseCase := admin_usecase.NewRoomUseCase(roomRepository, bookingRepository, reviewRepository)
+	roomHandler := admin.NewRoomHandler(roomUseCase)
 	adminGroup := r.Group("/admin")
 	{
 		adminGroup.GET("/", middleware.RequireLogin(), middleware.RequireRoles("admin"), adminHandler.AdminDashboard)
 		adminGroup.GET("/login", adminHandler.AdminLoginPage)
 		adminGroup.POST("/login", adminHandler.HandleLogin)
 		adminGroup.GET("/logout", adminHandler.HandleLogout)
+		adminGroup.GET("/rooms", middleware.RequireRoles("admin", "staff"), roomHandler.RoomManagementPage)
+		adminGroup.GET("/rooms/create", middleware.RequireRoles("admin", "staff"), roomHandler.CreateRoomPage)
+		adminGroup.POST("/rooms/create", middleware.RequireRoles("admin", "staff"), roomHandler.CreateRoom)
+		adminGroup.GET("/rooms/:id", middleware.RequireRoles("admin", "staff"), roomHandler.RoomDetailPage)
+		adminGroup.GET("/rooms/edit/:id", middleware.RequireRoles("admin", "staff"), roomHandler.EditRoomPage)
+		adminGroup.POST("/rooms/edit/:id", middleware.RequireRoles("admin", "staff"), roomHandler.UpdateRoom)
+		adminGroup.POST("/rooms/delete/:id", middleware.RequireRoles("admin", "staff"), roomHandler.DeleteRoom)
 	}
 	//User routes
 	userHandler := handler.NewUserHandler(userUseCase)
