@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicon icon-->
+  <link rel="shortcut icon" type="image/png" href="/assets/images/logos/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <!-- Core Css -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+  <title>{{ .Title}}</title>
+</head>
+
+<body class=" bg-surface">
+  <main>
+    {{ template "header.html" . }}
+    <!--start the project-->
+    <div id="main-wrapper" class="flex p-5 xl:pr-0">
+      <!-- sidebar -->
+      {{ template "sidebar.html" . }}
+      <!--end sidebar -->
+      <div class=" w-full page-wrapper xl:px-6 px-0">
+
+        <!-- Main Content -->
+        <main class="h-full  max-w-full">
+          <div class="container full-container p-0 flex flex-col gap-6">
+            <div class="card">
+              <div class="card-body h-screen">
+                <div class="flex justify-between items-center mb-6">
+                  <h1 class="text-lg font-semibold">Room Management</h1>
+                  <a href="/admin/rooms/create" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">+
+                    Add
+                    Room</a>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full bg-white shadow rounded-lg overflow-hidden">
+                    <thead class="bg-gray-200 text-gray-700">
+                      <tr>
+                        <th class="px-4 py-3 text-left">Name</th>
+                        <th class="px-4 py-3 text-left">Type</th>
+                        <th class="px-4 py-3 text-left">Price/Night</th>
+                        <th class="px-4 py-3 text-left">Beds</th>
+                        <th class="px-4 py-3 text-left">AirCon</th>
+                        <th class="px-4 py-3 text-left">Status</th>
+                        <th class="px-4 py-3 text-left">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{range .Rooms}}
+                      <tr class="border-t hover:bg-gray-50">
+                        <td class="px-4 py-2 text-gray-600 text-base">{{.Name}}</td>
+                        <td class="px-4 py-2 text-gray-600 text-base">{{.Type}}</td>
+                        <td class="px-4 py-2 text-gray-600 text-base">{{.PricePerNight}} VND</td>
+                        <td class="px-4 py-2 text-gray-600 text-base">{{.BedNum}}</td>
+                        <td class="px-4 py-2 text-gray-600 text-base">{{if .HasAircon}}✅{{else}}❌{{end}}</td>
+                        <td class="px-4 py-2 text-gray-600 text-base">{{if .IsAvailable}}✅{{else}}❌{{end}}</td>
+                        <td class="px-4 py-2 space-x-2">
+                          <a href="/admin/rooms/{{.ID}}"
+                            class="text-blue-500 hover:underline inline-flex items-center py-2 px-4 rounded-xl font-semibold bg-blue-100">View</a>
+                          <a href="/admin/rooms/edit/{{.ID}}"
+                            class="text-yellow-500 hover:underline inline-flex items-center py-2 px-4 rounded-xl font-semibold bg-yellow-100">Edit</a>
+                          <form action="/admin/rooms/delete/{{.ID}}" method="POST" class="inline-block"
+                            onsubmit="return confirm('Delete this room?');">
+                            <button type="submit"
+                              class="text-red-500 hover:underline inline-flex items-center py-2 px-4 rounded-xl font-semibold bg-red-100">Delete</button>
+                          </form>
+                        </td>
+                      </tr>
+                      {{else}}
+                      <tr>
+                        <td colspan="7" class="px-4 py-3 text-center text-gray-500">No rooms found.</td>
+                      </tr>
+                      {{end}}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <!-- Main Content End -->
+
+      </div>
+    </div>
+    <!--end of project-->
+  </main>
+
+  <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="/assets/libs/simplebar/dist/simplebar.min.js"></script>
+  <script src="/assets/libs/iconify-icon/dist/iconify-icon.min.js"></script>
+  <script src="/assets/js/sidebarmenu.js"></script>
+
+  <!-- solar icons -->
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+
+  <script src="/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+  <script src="/assets/js/dashboard.js"></script>
+
+</body>
+
+</html>
